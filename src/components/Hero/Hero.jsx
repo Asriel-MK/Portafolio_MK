@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Hero.css';
 
 const Hero = () => {
+
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // This is the mouse position
+
+  useEffect(() => { 
+    const handleMouseMove = (e) => { // This is the function that updates the mouse position
+      setMousePosition({ x: e.clientX, y: e.clientY }); // This updates the mouse position
+    };
+
+    window.addEventListener('mousemove', handleMouseMove); // This adds the event listener to the window
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
     <div className="hero-container">
+      <div 
+        className="spotlight"
+        style={{
+          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, 
+                      rgba(29, 78, 216, 0.15),
+                      transparent 80%)`
+        }}
+      />
       <nav className="navigation">
         <div className="nav-links">
           <a href="#about">About me</a>

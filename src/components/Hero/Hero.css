@@ -5,7 +5,20 @@
   padding: 2rem;
   padding-top: 3rem;  /* Add extra padding at top to account for fixed nav */
   overflow: hidden;
+
+  position: relative; 
+  overflow: hidden;    
 }
+
+  .spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
   
   .navigation {
     display: flex;
@@ -16,10 +29,13 @@
     right: 0;           /* Align to right */
     left: 0;            /* Stretch across full width */
     background-color: #0a192f;  /* Match hero background */
-    z-index: 1000;      /* Ensure it stays on top */
+    backdrop-filter: blur(8px);  /* Optional: adds a blur effect */
+    z-index: 1;      /* Ensure it stays on top */
   }
   
   .nav-links {
+    position: relative;
+    z-index: 3;  /* Higher than spotlight */
     display: flex;
     gap: 2rem;
   }
@@ -36,10 +52,13 @@
   }
   
   .hero-content { /* Hero content container */
+    position: relative;  /* Add this */
+    z-index: 3;      
+
     max-width: 1000px;
     margin: 0 auto;
     padding-top: 6rem;
-    padding-right: 4rem;  /* Left padding for desktop view */
+    padding-right: 7rem;  /* Left padding for desktop view */
   }
   
   .greeting {
@@ -82,6 +101,19 @@
     background: rgba(100, 255, 218, 0.1);
   }
   
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .spotlight {
+    animation: fadeIn 1s ease-in;
+  }
+
   /* Responsive Design for mobile devices */
   @media (max-width: 768px) {
     .nav-links {
@@ -94,6 +126,10 @@
   
     .title {
       font-size: 2.5rem;
+    }
+
+    .spotlight {
+      display: none;
     }
   }
   
