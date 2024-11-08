@@ -5,7 +5,7 @@ const Hero = () => {
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); // This is the mouse position
 
-  useEffect(() => { 
+  useEffect(() => { // This is the useEffect hook that updates the mouse position for the spotlight effect
     const handleMouseMove = (e) => { // This is the function that updates the mouse position
       setMousePosition({ x: e.clientX, y: e.clientY }); // This updates the mouse position
     };
@@ -16,6 +16,12 @@ const Hero = () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
+
+  const handleResumeClick = (e) => { // This is the function that opens the resume in a new tab
+    e.preventDefault();
+    window.open(process.env.PUBLIC_URL + '/assets/Resume.pdf', '_blank');
+  };
+
 
   return (
     <div className="hero-container">
@@ -33,7 +39,7 @@ const Hero = () => {
           <a href="#work">My work</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
-          <a href="#resume">Resume</a>
+          <a href="#resume" onClick={handleResumeClick}>Resume</a> 
         </div>
       </nav>
 
